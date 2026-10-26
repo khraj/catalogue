@@ -31,7 +31,7 @@ pipeline{
     
         stage('Deploy') {
             steps {
-                echo "hello $PERSON Nice to meet you...!!"
+                echo "hello Nice to meet you...!!"
             }
         }
     }
