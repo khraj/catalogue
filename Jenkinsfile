@@ -53,6 +53,16 @@ pipeline{
                 echo "hello Nice to meet you...!!"
             }
         }
+        stage("check docker") {
+            steps{
+                sh """
+                    whoami 
+                    id
+                    docker --version
+                    docker ps
+                """
+            }
+        }
     }
     post {
         always {
