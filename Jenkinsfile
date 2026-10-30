@@ -11,6 +11,10 @@ pipeline{
     }
     environment {
         COURSE = 'Jenkins'
+        ACCOUNT_ID = '143710972330'
+        PROJECT = 'roboshop'
+        COMPONENT = 'catalogue'
+        APP_VERSION = 
     }
     stages{
         stage('Read Version') {
@@ -45,25 +49,21 @@ pipeline{
         stage("Build Image") {
             steps{
                 script {
-                    sh """
-                        docker build -t catalogue:${appVersion} .
-                    """
+                  withAWS(region:'ap-southeast-2',credentials:'AWS-Creds'){
+                        sh """
+                            aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com
+
+                            docker build ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:latest
+
+                            docker images
+                            
+                            docker push ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
+
+                        """
+                    }
                 }
             }
         }
-
-        stage('Test') {
-            steps {
-                       echo "Testing..."                                
-            }
-        }
-    
-        stage('Deploy') {
-            steps {
-                echo "hello Nice to meet you...!!"
-            }
-        }
-
     }
     post {
         success {
