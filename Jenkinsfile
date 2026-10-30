@@ -14,10 +14,9 @@ pipeline{
         ACCOUNT_ID = '143710972330'
         PROJECT = 'roboshop'
         COMPONENT = 'catalogue'
-        APP_VERSION = 
     }
 
-    
+
     stages{
         stage('Read Version') {
             steps {
@@ -55,7 +54,7 @@ pipeline{
                         sh """
                             aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com
 
-                            docker build ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:latest
+                            docker build ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:latest 
 
                             docker images
                             
