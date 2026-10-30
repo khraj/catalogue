@@ -16,6 +16,8 @@ pipeline{
         COMPONENT = 'catalogue'
         APP_VERSION = 
     }
+
+    
     stages{
         stage('Read Version') {
             steps {
