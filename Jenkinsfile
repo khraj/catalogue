@@ -56,6 +56,8 @@ pipeline{
 
                             docker build -t ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:latest .
 
+                            docker tag ${PROJECT}/${COMPONENT}:latest 143710972330.dkr.ecr.ap-southeast-2.amazonaws.com/roboshop/catalogue:latest
+
                             docker images
                             
                             docker push ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
