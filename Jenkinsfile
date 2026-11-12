@@ -54,9 +54,7 @@ pipeline{
                         sh """
                             aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com
 
-                            docker build -t ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:latest .
-
-                            docker tag ${PROJECT}/${COMPONENT}:latest 143710972330.dkr.ecr.ap-southeast-2.amazonaws.com/roboshop/catalogue:latest
+                            docker build -t ${ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion} .
 
                             docker images
                             
